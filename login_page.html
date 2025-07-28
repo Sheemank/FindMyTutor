@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | FindMyTutor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-container {
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(80, 80, 160, 0.18), 0 2px 8px rgba(0,0,0,0.09);
+      padding: 38px 32px 28px 32px;
+      width: 100%;
+      max-width: 390px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      animation: fadeInLogin 1s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes fadeInLogin {
+      from { opacity: 0; transform: translateY(40px) scale(0.98);}
+      to { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    .login-container h2 {
+      margin: 0 0 10px 0;
+      color: #2563eb;
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .login-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f3f6fd;
+      box-shadow: 0 1px 4px #2563eb11;
+    }
+    .login-tab {
+      flex: 1;
+      padding: 12px 0;
+      text-align: center;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #7c3aed;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      outline: none;
+    }
+    .login-tab.active {
+      background: linear-gradient(90deg, #2563eb 60%, #7c3aed 100%);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 2px 8px #2563eb22;
+    }
+    .login-container label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .login-container input[type="email"],
+    .login-container input[type="password"],
+    .login-container input[type="tel"],
+    .login-container input[type="text"],
+    .login-container input[type="number"] {
+      width: 100%;
+      padding: 12px 10px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      background: #f8fafc;
+      transition: border 0.2s;
+    }
+    .login-container input:focus {
+      border: 1.5px solid #7c3aed;
+      outline: none;
+      background: #fff;
+    }
+    .login-btn, .otp-btn {
+      width: 100%;
+      padding: 12px 0;
+      background: linear-gradient(90deg, #2563eb 60%, #7c3aed 100%);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px #2563eb22;
+      letter-spacing: 0.5px;
+    }
+    .login-btn:hover, .otp-btn:hover {
+      background: linear-gradient(90deg, #7c3aed 60%, #2563eb 100%);
+      box-shadow: 0 4px 16px #7c3aed33;
+    }
+    .login-error {
+      color: #e11d48;
+      background: #fee2e2;
+      border-radius: 7px;
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      text-align: center;
+      display: none;
+    }
+    .login-success {
+      color: #22c55e;
+      background: #dcfce7;
+      border-radius: 7px;
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      text-align: center;
+      display: none;
+    }
+    .login-container .google-logo {
+      width: 24px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    .otp-input-group {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .otp-input-group input {
+      width: 38px;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 10px 0;
+      border-radius: 7px;
+      border: 1.5px solid #d1d5db;
+      background: #f8fafc;
+      transition: border 0.2s;
+    }
+    .otp-input-group input:focus {
+      border: 1.5px solid #2563eb;
+      background: #fff;
+    }
+    .otp-info {
+      color: #2563eb;
+      font-size: 0.98rem;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 18px 4vw 18px 4vw;
+        max-width: 98vw;
+      }
+    }
+  </style>
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="login-container">
+    <h2>
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="google-logo" alt="Google Logo">
+      Login
+    </h2>
+    <div class="login-tabs">
+      <button class="login-tab active" id="emailTab" type="button">Email Login</button>
+      <button class="login-tab" id="mobileTab" type="button">Mobile Login</button>
+    </div>
+    <div id="loginError" class="login-error"></div>
+    <div id="loginSuccess" class="login-success"></div>
+    <!-- Email/Password Login Form -->
+    <form id="loginForm" autocomplete="on">
+      <label for="email">Email</label>
+      <input type="email" id="email" required placeholder="Enter your email" autocomplete="email" />
+      <label for="password">Password</label>
+      <input type="password" id="password" required placeholder="Enter your password" autocomplete="current-password" />
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <!-- Mobile/OTP Login Form -->
+    <form id="mobileForm" style="display:none;">
+      <label for="mobile">Mobile Number</label>
+      <input type="tel" id="mobile" pattern="[0-9]{10}" maxlength="10" required placeholder="Enter your 10-digit mobile" autocomplete="tel" />
+      <button type="button" class="otp-btn" id="sendOtpBtn">Send OTP</button>
+      <div id="otpSection" style="display:none;">
+        <div class="otp-info">Enter the OTP sent to your mobile</div>
+        <div class="otp-input-group">
+          <input type="text" maxlength="1" class="otp-digit" />
+          <input type="text" maxlength="1" class="otp-digit" />
+          <input type="text" maxlength="1" class="otp-digit" />
+          <input type="text" maxlength="1" class="otp-digit" />
+          <input type="text" maxlength="1" class="otp-digit" />
+          <input type="text" maxlength="1" class="otp-digit" />
+        </div>
+        <button type="button" class="login-btn" id="verifyOtpBtn">Verify OTP</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    // TODO: Replace with your Firebase project config
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Tab switching
+    const emailTab = document.getElementById('emailTab');
+    const mobileTab = document.getElementById('mobileTab');
+    const loginForm = document.getElementById('loginForm');
+    const mobileForm = document.getElementById('mobileForm');
+    emailTab.onclick = () => {
+      emailTab.classList.add('active');
+      mobileTab.classList.remove('active');
+      loginForm.style.display = '';
+      mobileForm.style.display = 'none';
+      document.getElementById('loginError').style.display = "none";
+      document.getElementById('loginSuccess').style.display = "none";
+    };
+    mobileTab.onclick = () => {
+      mobileTab.classList.add('active');
+      emailTab.classList.remove('active');
+      loginForm.style.display = 'none';
+      mobileForm.style.display = '';
+      document.getElementById('loginError').style.display = "none";
+      document.getElementById('loginSuccess').style.display = "none";
+    };
+
+    // Email/Password Login
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById('loginSuccess').style.display = "block";
+        document.getElementById('loginSuccess').textContent = "Login successful! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      }
+    });
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      document.getElementById('loginError').style.display = "none";
+      document.getElementById('loginSuccess').style.display = "none";
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => {
+          document.getElementById('loginSuccess').style.display = "block";
+          document.getElementById('loginSuccess').textContent = "Login successful! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1200);
+        })
+        .catch(error => {
+          document.getElementById('loginError').style.display = "block";
+          document.getElementById('loginError').textContent = error.message.replace("Firebase:", "");
+        });
+    });
+
+    // Mobile/OTP Login (Temporary Demo)
+    // In production, use Firebase Phone Auth with reCAPTCHA
+    let generatedOtp = "";
+    document.getElementById('sendOtpBtn').onclick = function() {
+      const mobile = document.getElementById('mobile').value.trim();
+      document.getElementById('loginError').style.display = "none";
+      document.getElementById('loginSuccess').style.display = "none";
+      if (!/^[0-9]{10}$/.test(mobile)) {
+        document.getElementById('loginError').style.display = "block";
+        document.getElementById('loginError').textContent = "Please enter a valid 10-digit mobile number.";
+        return;
+      }
+      // Generate a 6-digit OTP (temporary, for demo)
+      generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+      document.getElementById('otpSection').style.display = "block";
+      // Autofill OTP for demo (in real use, send via SMS)
+      const otpDigits = document.querySelectorAll('.otp-digit');
+      otpDigits.forEach((el, idx) => el.value = generatedOtp[idx] || "");
+      document.getElementById('loginSuccess').style.display = "block";
+      document.getElementById('loginSuccess').textContent = "Temporary OTP: " + generatedOtp;
+    };
+
+    // OTP input auto-focus (improved for all typing and paste)
+    document.querySelectorAll('.otp-digit').forEach((input, idx, arr) => {
+      input.addEventListener('input', function(e) {
+        // Only allow digits
+        this.value = this.value.replace(/[^0-9]/g, '');
+        if (this.value.length === 1 && idx < arr.length - 1) {
+          arr[idx + 1].focus();
+        }
+        // If user pastes the OTP
+        if (this.value.length > 1) {
+          const val = this.value.split('');
+          for (let i = 0; i < val.length && idx + i < arr.length; i++) {
+            arr[idx + i].value = val[i];
+          }
+          if (idx + val.length - 1 < arr.length - 1) {
+            arr[idx + val.length].focus();
+          } else {
+            arr[arr.length - 1].focus();
+          }
+        }
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key === "Backspace" && this.value === "" && idx > 0) {
+          arr[idx - 1].focus();
+        }
+      });
+      input.addEventListener('paste', function(e) {
+        const paste = (e.clipboardData || window.clipboardData).getData('text');
+        if (/^\d{6}$/.test(paste)) {
+          arr.forEach((el, i) => el.value = paste[i]);
+          arr[arr.length - 1].focus();
+          e.preventDefault();
+        }
+      });
+    });
+
+    document.getElementById('verifyOtpBtn').onclick = function() {
+      const enteredOtp = Array.from(document.querySelectorAll('.otp-digit')).map(i => i.value).join('');
+      if (enteredOtp === generatedOtp && enteredOtp.length === 6) {
+        document.getElementById('loginSuccess').style.display = "block";
+        document.getElementById('loginSuccess').textContent = "Mobile login successful! Redirecting...";
+        document.getElementById('loginError').style.display = "none";
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      } else {
+        document.getElementById('loginError').style.display = "block";
+        document.getElementById('loginError').textContent = "Invalid OTP. Please try again.";
+      }
+    };
+  </script>
+</body>
+</html>

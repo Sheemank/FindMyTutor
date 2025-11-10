@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4ade80;
+            --warning: #f59e0b;
+            --card-bg: #ffffff;
+            --text: #2b2d42;
+            --text-light: #6c757d;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, #f72585 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7ec 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .profile-header {
+            background: var(--gradient);
+            color: white;
+            padding: 50px 30px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .profile-picture {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- NEW CSS for IMG inside profile picture --- */
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+
+        .profile-picture i {
+            font-size: 80px;
+            color: white;
+        }
+
+        .profile-name {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-subject {
+            font-size: 22px;
+            opacity: 0.95;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .subject-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            margin-top: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-body {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 50px 40px;
+        }
+
+        .profile-left {
+            flex: 1;
+            min-width: 320px;
+            padding-right: 50px;
+            border-right: 1px solid #eaeaea;
+        }
+
+        .profile-right {
+            flex: 2;
+            min-width: 320px;
+            padding-left: 50px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            opacity: 0;
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.3s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.5s; }
+        .section:nth-child(5) { animation-delay: 0.6s; }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .section-title i {
+            margin-right: 12px;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 18px;
+            transition: var(--transition);
+            padding: 10px 0;
+            border-radius: 8px;
+        }
+
+        .info-item:hover {
+            transform: translateX(8px);
+            background: rgba(67, 97, 238, 0.03);
+            padding-left: 10px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            width: 150px;
+            flex-shrink: 0;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .info-label i {
+            margin-right: 10px;
+            width: 22px;
+            color: var(--primary-light);
+        }
+
+        .info-value {
+            color: var(--text);
+        }
+
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .badge {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+        }
+
+        .badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge i {
+            margin-right: 6px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+            border: none;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-top: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .video-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 22px;
+            transition: var(--transition);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+            text-decoration: none; /* --- NEW --- */
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-8px) rotate(5deg);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .stat-box {
+            flex: 1;
+            background: white;
+            padding: 25px 15px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-light);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .progress-container {
+            margin-top: 15px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* ... (Aapka poora responsive CSS same rahega) ... */
+        @media (max-width: 1024px) {
+            .profile-body { padding: 40px 30px; }
+            .profile-left { padding-right: 30px; }
+            .profile-right { padding-left: 30px; }
+        }
+        @media (max-width: 768px) {
+            .profile-body { flex-direction: column; padding: 30px 25px; }
+            .profile-left { padding-right: 0; margin-bottom: 30px; border-right: none; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+            .profile-right { padding-left: 0; }
+            .contact-buttons { flex-direction: column; }
+            .stats-container { flex-wrap: wrap; }
+            .stat-box { flex: 1 1 calc(50% - 10px); min-width: 120px; }
+            .profile-header { padding: 40px 20px 30px; }
+            .profile-name { font-size: 30px; }
+            .profile-subject { font-size: 20px; }
+        }
+        @media (max-width: 480px) {
+            .profile-body { padding: 25px 20px; }
+            .profile-header { padding: 30px 15px 25px; }
+            .profile-picture { width: 150px; height: 150px; }
+            .profile-picture i { font-size: 65px; }
+            .profile-name { font-size: 26px; }
+            .profile-subject { font-size: 18px; }
+            .section-title { font-size: 20px; }
+            .info-item { flex-direction: column; gap: 5px; }
+            .info-label { width: 100%; }
+            .badge-container { justify-content: center; }
+            .stats-container { flex-direction: column; }
+            .stat-box { flex: 1; }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(67, 97, 238, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+        }
+        .floating-elements {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; z-index: 1;
+        }
+        .floating-element {
+            position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.1); animation: floatAround 15s infinite linear;
+        }
+        .floating-element:nth-child(1) {
+            width: 80px; height: 80px; top: 10%; left: 10%; animation-duration: 20s;
+        }
+        .floating-element:nth-child(2) {
+            width: 40px; height: 40px; top: 60%; left: 80%; animation-duration: 15s; animation-delay: 2s;
+        }
+        .floating-element:nth-child(3) {
+            width: 60px; height: 60px; top: 80%; left: 20%; animation-duration: 25s; animation-delay: 1s;
+        }
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 20px) rotate(90deg); }
+            50% { transform: translate(0, 40px) rotate(180deg); }
+            75% { transform: translate(-20px, 20px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="profile-container" style="display: none;">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="floating-elements">
+                    <div class="floating-element"></div>
+                    <div class="floating-element"></div>
+                    <div class="floating-element"></div>
+                </div>
+                <div class="profile-picture" id="teacher-pic">
+                    <i class="fas fa-user-graduate"></i> </div>
+                <h1 class="profile-name" id="teacher-name">Loading...</h1>
+                <p class="profile-subject" id="teacher-subject">Loading...</p>
+                <div class="subject-badge" id="teacher-tagline">Expert in Concept-Based Teaching</div>
+            </div>
+            
+            <div class="profile-body">
+                <div class="profile-left">
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-user"></i> About Me</h3>
+                        <p id="teacher-bio">Loading bio...</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-graduation-cap"></i> Qualifications</h3>
+                        <p id="teacher-qualification">Loading...</p>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-briefcase"></i> Experience</h3>
+                        <p id="teacher-experience">Loading...</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="experience-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-language"></i> Languages</h3>
+                        <div class="badge-container" id="teacher-languages">
+                            </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-users"></i> Grades</h3>
+                        <div class="badge-container" id="teacher-grades">
+                            </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-award"></i> Certifications</h3>
+                        <div class="badge-container" id="teacher-certifications">
+                            </div>
+                    </div>
+                    
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-success">...</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-rating">...</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-students">...</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-buttons">
+                        <button class="btn btn-primary pulse" id="contact-btn">
+                            <i class="fas fa-envelope"></i> Contact
+                        </button>
+                        <button class="btn btn-outline" id="schedule-btn">
+                            <i class="fas fa-calendar-alt"></i> Schedule Class
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="profile-right">
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-address-card"></i> Contact Information</h3>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-phone"></i> Phone:</div>
+                            <div class="info-value" id="teacher-phone">Loading...</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-envelope"></i> Email:</div>
+                            <div class="info-value" id="teacher-email">Loading...</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-map-marker-alt"></i> Location:</div>
+                            <div class="info-value" id="teacher-location">Loading...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-clock"></i> Availability</h3>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-calendar"></i> Schedule:</div>
+                            <div class="info-value" id="teacher-availability">Loading...</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label"><i class="fas fa-money-bill-wave"></i> Fees:</div>
+                            <div class="info-value highlight" id="teacher-fees">Loading...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-play-circle"></i> Demo Video</h3>
+                        <div class="video-container">
+                            <iframe id="teacher-demo-video"
+                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                    title="Demo Video" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="section">
+                        <h3 class="section-title"><i class="fas fa-share-alt"></i> Connect</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" id="linkedin-link" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" target="_blank">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" id="error-container" style="display: none; text-align: center;">
+        <h1 style="color: var(--secondary);">Teacher Not Found</h1>
+        <p style="font-size: 1.2rem;">The profile you are looking for does not exist.</p>
+        <a href="index.html" class="btn btn-primary" style="text-decoration: none; margin-top: 20px; display: inline-block;">Go Back Home</a>
+    </div>
+
+
+    <script src="data.js"></script>
+    
+    <script>
+        // Function to populate badge containers
+        function populateBadges(containerId, items, iconClass) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            
+            items.forEach(item => {
+                const badge = document.createElement('div');
+                badge.className = 'badge';
+                badge.innerHTML = `<i class="${iconClass}"></i> ${item}`;
+                container.appendChild(badge);
+            });
+        }
+
+        // Main script jo page load hone par chalta hai
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. URL se Teacher ki ID nikaalein
+            const params = new URLSearchParams(window.location.search);
+            const teacherId = params.get('id');
+
+            if (!teacherId) {
+                // Agar ID nahi hai
+                document.getElementById('error-container').style.display = 'block';
+                return;
+            }
+
+            // 2. 'data.js' se uss ID ka teacher dhundein
+            // (Use '==' because URL param is string, id might be number)
+            const teacher = allTutors.find(t => t.id == teacherId);
+
+            if (!teacher) {
+                // Agar ID hai par teacher nahi mila
+                document.getElementById('error-container').style.display = 'block';
+                return;
+            }
+
+            // 3. Agar teacher mil gaya, toh profile populate karein
+            document.getElementById('profile-container').style.display = 'block';
+            
+            // Page Title
+            document.title = `Profile - ${teacher.name}`;
+
+            // Header
+            document.getElementById('teacher-pic').innerHTML = `<img src="${teacher.img}" alt="${teacher.name}">`;
+            document.getElementById('teacher-name').textContent = teacher.name;
+            document.getElementById('teacher-subject').textContent = teacher.subjects.join(' & ') + " Specialist";
+            document.getElementById('teacher-tagline').textContent = `Expert in ${teacher.subjects[0]}`;
+
+            // Left Column
+            document.getElementById('teacher-bio').textContent = teacher.bio;
+            document.getElementById('teacher-qualification').textContent = teacher.qualification;
+            document.getElementById('teacher-experience').textContent = teacher.experience + " years";
+            // Experience progress bar (e.g., 10 years max)
+            const expPercent = (teacher.experience / 10) * 100;
+            document.getElementById('experience-progress').style.width = `${Math.min(expPercent, 100)}%`;
+
+            // Badges
+            populateBadges('teacher-languages', teacher.languages, 'fas fa-language');
+            populateBadges('teacher-grades', teacher.grades, 'fas fa-user-graduate');
+            populateBadges('teacher-certifications', teacher.certifications, 'fas fa-award');
+
+            // Stats
+            document.getElementById('stat-success').textContent = teacher.stats.successRate;
+            document.getElementById('stat-rating').textContent = teacher.stats.rating.toFixed(1);
+            document.getElementById('stat-students').textContent = teacher.stats.students + "+";
+
+            // Right Column
+            document.getElementById('teacher-phone').textContent = teacher.contact.phone;
+            document.getElementById('teacher-email').textContent = teacher.contact.email;
+            document.getElementById('teacher-location').textContent = teacher.location;
+            document.getElementById('teacher-availability').textContent = teacher.availability;
+            document.getElementById('teacher-fees').textContent = teacher.fees;
+            
+            // Video & Social
+            document.getElementById('teacher-demo-video').src = teacher.demo_video;
+            document.getElementById('linkedin-link').href = teacher.linkedin;
+            
+            // Button event listeners
+            document.getElementById('contact-btn').addEventListener('click', function() {
+                alert(`Contact ${teacher.name} at ${teacher.contact.email} or ${teacher.contact.phone}`);
+            });
+            
+            document.getElementById('schedule-btn').addEventListener('click', function() {
+                alert(`Schedule a class with ${teacher.name}. Available: ${teacher.availability}`);
+            });
+        });
+    </script>
+</body>
+</html>

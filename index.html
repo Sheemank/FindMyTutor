@@ -12,7 +12,7 @@
     <div class="logo">FindMyTutor</div>
     
     <ul>
-      <li><a href="main.html" class="active">Home</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
       <li><a href="search_teachers.html">Teachers</a></li>
       <li><a href="login_page.html">Login</a></li>
       <li><a href="register_student_teacher.html">Register</a></li>
@@ -29,111 +29,21 @@
       <input type="text" id="subject" placeholder="Subject (e.g. Math, Science)" />
       <button onclick="searchTutors()">Search</button>
     </div>
+
+    <div class="popular-searches">
+        <span>Popular:</span>
+        <a href="#">Maths in Delhi</a>
+        <a href="#">Physics in Mumbai</a>
+        <a href="#">Coding (Online)</a>
+        <a href="#">English in Bangalore</a>
+    </div>
+
   </header>
   <main>
     <h2>Top Tutors Near You</h2>
-    <div class="tutor-cards">
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma" />
-        <h3>Priya Sharma</h3>
-        <p>Math & Science - 5 Years Experience</p>
-        <p><span class="location">🏠 Rohini, Delhi, India</span></p>
-        <div class="stars">★★★★☆</div>
-        <div class="feedbacks">128 feedbacks</div>
+    <div class="tutor-cards" id="tutorCardContainer">
       </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Mehta" />
-        <h3>Rahul Mehta</h3>
-        <p>English & SST - 3 Years Experience</p>
-        <p><span class="location">🏠 Andheri, Mumbai, India</span></p>
-        <div class="stars">★★★★★</div>
-        <div class="feedbacks">95 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sneha Verma" />
-        <h3>Sneha Verma</h3>
-        <p>Physics & Chemistry - 7 Years Experience</p>
-        <p><span class="location">🏠 Indiranagar, Bangalore, India</span></p>
-        <div class="stars">★★★★☆</div>
-        <div class="feedbacks">143 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Amit Roy" />
-        <h3>Amit Roy</h3>
-        <p>Accounts & Business - 4 Years Experience</p>
-        <p><span class="location">🏠 Salt Lake, Kolkata, India</span></p>
-        <div class="stars">★★★☆☆</div>
-        <div class="feedbacks">67 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Divya Kaur" />
-        <h3>Divya Kaur</h3>
-        <p>Biology & Chemistry - 6 Years Experience</p>
-        <p><span class="location">🏠 Sector 22, Chandigarh, India</span></p>
-        <div class="stars">★★★★★</div>
-        <div class="feedbacks">210 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/men/51.jpg" alt="Karan Singh" />
-        <h3>Karan Singh</h3>
-        <p>Computer & Coding - 2 Years Experience</p>
-        <p><span class="location">🏠 Malviya Nagar, Jaipur, India</span></p>
-        <div class="stars">★★★☆☆</div>
-        <div class="feedbacks">39 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Meena Joshi" />
-        <h3>Meena Joshi</h3>
-        <p>Hindi & Sanskrit - 8 Years Experience</p>
-        <p><span class="location">🏠 Gomti Nagar, Lucknow, India</span></p>
-        <div class="stars">★★★★☆</div>
-        <div class="feedbacks">156 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Suresh Patel" />
-        <h3>Suresh Patel</h3>
-        <p>Maths - 10 Years Experience</p>
-        <p><span class="location">🏠 Maninagar, Ahmedabad, India</span></p>
-        <div class="stars">★★★★★</div>
-        <div class="feedbacks">201 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/women/21.jpg" alt="Anjali Nair" />
-        <h3>Anjali Nair</h3>
-        <p>English - 6 Years Experience</p>
-        <p><span class="location">🏠 Vyttila, Kochi, India</span></p>
-        <div class="stars">★★★★☆</div>
-        <div class="feedbacks">88 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/men/61.jpg" alt="Ravi Kumar" />
-        <h3>Ravi Kumar</h3>
-        <p>Science - 4 Years Experience</p>
-        <p>
-          <span class="location">🏠 Banjara Hills, Hyderabad, India</span>
-        </p>
-        <div class="stars">★★★☆☆</div>
-        <div class="feedbacks">54 feedbacks</div>
-      </div>
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Pooja Shah" />
-        <h3>Pooja Shah</h3>
-        <p>Commerce - 5 Years Experience</p>
-        <p><span class="location">🏠 Navrangpura, Ahmedabad, India</span></p>
-        <div class="stars">★★★★☆</div>
-        <div class="feedbacks">112 feedbacks</div>
-      </div> 
-      <div class="card">
-        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Arjun Das" />
-        <h3>Arjun Das</h3>
-        <p>History & Civics - 7 Years Experience</p>
-        <p><span class="location">🏠 Alipore, Kolkata, India</span></p>
-        <div class="stars">★★★★★</div>
-        <div class="feedbacks">134 feedbacks</div>
-      </div>
-    </div>
   </main>
-  <!-- Stats Section Start -->
   <section class="trusted-platform">
     <h2>A Platform Trusted by Students</h2>
     <p>
@@ -149,8 +59,7 @@
         <div class="stat-number glow" data-target="24000">0</div>
         <div class="stat-label">Mock Tests</div>
         <div class="stat-img">
-          <!-- SVG icon here -->
-        </div>
+          </div>
       </div>
       <div class="stat-card" style="background: #e3f7ff">
         <div class="stat-number glow" data-target="14000">0</div>
@@ -162,14 +71,11 @@
       </div>
     </div>
   </section>
-  <!-- Stats Section End -->
-  <!-- Reviews Section Start -->
   <section class="reviews-section">
     <h2>Students Speak</h2>
     <div class="reviews-slider-wrapper">
       <button class="slider-btn left" id="sliderLeftBtn">&#8249;</button>
       <div class="reviews-slider" id="reviewsSlider">
-        <!-- Repeat for all 10 reviews -->
         <div class="review-card">
           <div class="review-header">
             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Aarohi Sharma" />
@@ -191,7 +97,6 @@
             </button>
           </div>
         </div>
-        <!-- ...repeat for other 9 reviews (change names, images, text, counts)... -->
         <div class="review-card">
           <div class="review-header">
             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rohan Mehta" />
@@ -213,7 +118,6 @@
             </button>
           </div>
         </div>
-        <!-- ...add 8 more reviews in same format... -->
         <div class="review-card">
           <div class="review-header">
             <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sneha Verma" />
@@ -292,8 +196,7 @@
           <div class="review-actions">
             <button class="like-btn" onclick="likeReview(this)">
               👍 <span class="like-count">7</span>
-            </button>live 
-            
+            </button>
             <button class="comment-btn" onclick="commentReview(this)">
               💬 <span class="comment-count">0</span>
             </button>
@@ -387,8 +290,6 @@
       <button class="slider-btn right" id="sliderRightBtn">&#8250;</button>
     </div>
   </section>
-  <!-- Reviews Section End -->
-
   <footer class="site-footer">
     <div class="footer-main">
       <div class="footer-col">
@@ -453,96 +354,6 @@
     </div>
   </footer>
   <script src="script.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const counters = document.querySelectorAll(".stat-number");
-      const duration = 4000; // 4 seconds
-
-      counters.forEach((counter) => {
-        const target = +counter.getAttribute("data-target");
-        let start = 0;
-        let step = Math.ceil(target / (duration / 20));
-        if (step < 1) step = 1;
-        let current = 0;
-
-        function updateCounter() {
-          current += step;
-          if (current > target) current = target;
-
-          // Formatting for large numbers
-          if (target >= 1000000) {
-            counter.textContent = Math.floor(current / 1000000) + " Million+";
-          } else if (target >= 1000) {
-            counter.textContent = Math.floor(current).toLocaleString() + "+";
-          } else {
-            counter.textContent = current + "+";
-          }
-
-          if (current < target) {
-            setTimeout(updateCounter, 20);
-          } else {
-            // Ensure final value is exact
-            if (target >= 1000000) {
-              counter.textContent =
-                Math.floor(target / 1000000) + " Million+";
-            } else if (target >= 1000) {
-              counter.textContent = target.toLocaleString() + "+";
-            } else {
-              counter.textContent = target + "+";
-            }
-          }
-        }
-        updateCounter();
-      });
-    });
-    const slider = document.getElementById("reviewsSlider");
-    let cardWidth = slider.children[0].offsetWidth + 24; // card + gap
-    let index = 0;
-    let isHovered = false;
-
-    // Clone first few cards for infinite effect
-    for (let i = 0; i < 3; i++) {
-      slider.appendChild(slider.children[i].cloneNode(true));
-    }
-
-    function slideNext() {
-      if (isHovered) return;
-      index++;
-      slider.style.transition = "transform 0.7s cubic-bezier(.77,0,.18,1)";
-      slider.style.transform = `translateX(-${index * cardWidth}px)`;
-      if (index === slider.children.length - 3) {
-        setTimeout(() => {
-          slider.style.transition = "none";
-          slider.style.transform = "translateX(0)";
-          index = 0;
-        }, 700);
-      }
-    }
-    let sliderInterval = setInterval(slideNext, 2500);
-
-    slider.addEventListener("mouseenter", () => (isHovered = true));
-    slider.addEventListener("mouseleave", () => (isHovered = false));
-
-    window.addEventListener("resize", () => {
-      cardWidth = slider.children[0].offsetWidth + 24;
-      slider.style.transition = "none";
-      slider.style.transform = `translateX(-${index * cardWidth}px)`;
-    });
-
-    // Like/Comment system
-    function likeReview(btn) {
-      let count = btn.querySelector(".like-count");
-      count.textContent = parseInt(count.textContent) + 1;
-      btn.classList.add("liked");
-      setTimeout(() => btn.classList.remove("liked"), 400);
-    }
-    function commentReview(btn) {
-      let count = btn.querySelector(".comment-count");
-      count.textContent = parseInt(count.textContent) + 1;
-      btn.classList.add("commented");
-      setTimeout(() => btn.classList.remove("commented"), 400);
-    }
-  </script>
-</body>
+  <script src="data.js"></script> 
 
 </html>

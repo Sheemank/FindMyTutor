@@ -1,8 +1,21 @@
+/* --- NEW: Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lato:wght@400;700&display=swap');
+
 body {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    /* --- UPDATED: Font Family --- */
+    font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
     background: #f8f9fa;
+    color: #333; /* Darker text for readability */
 }
+
+/* --- UPDATED: Headings Font --- */
+h1, h2, h3, h4, .logo, .teacher-name, .review-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -13,16 +26,16 @@ nav {
 }
 .logo {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 700; /* Bolder logo */
     color: #2563eb;
 }
-nav ul {/* Add this to your style.css */
 .stars {
     color: #FFD700;
     font-size: 1.3rem;
     margin-top: 8px;
     letter-spacing: 2px;
 }
+nav ul {
     list-style: none;
     display: flex;
     gap: 32px;
@@ -33,22 +46,29 @@ nav ul li a {
     text-decoration: none;
     color: #222;
     font-size: 1.1rem;
+    font-weight: 500; /* --- NEW --- */
     padding: 6px 16px;
     border-radius: 6px;
-    transition: background 0.2s;
+    transition: all 0.2s ease; /* --- UPDATED --- */
+    border: 2px solid transparent; /* Placeholder for alignment */
 }
+
+/* --- UPDATED: Navbar Active/Hover State --- */
 nav ul li a.active,
 nav ul li a:hover {
     border: 2px solid #2563eb;
     color: #2563eb;
+    background-color: #eef2ff; /* Light blue background */
 }
+
 header {
     background: #e3efff;
     text-align: center;
     padding: 48px 0 64px 0;
 }
 header h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem; /* --- NEW: Slightly larger --- */
+    font-weight: 700;
     color: #2563eb;
     margin-bottom: 12px;
 }
@@ -69,29 +89,63 @@ header p {
     border-radius: 6px;
     width: 220px;
 }
+
+/* --- UPDATED: Button Style with Gradient --- */
 .search-bar button {
     padding: 12px 28px;
-    background: #2563eb;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
     color: #fff;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
+    font-weight: 600; /* --- NEW --- */
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 .search-bar button:hover {
-    background: #1746a2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
 }
+
+/* --- NEW: Popular Searches Tags --- */
+.popular-searches {
+    margin-top: 24px;
+}
+.popular-searches span {
+    color: #444;
+    font-weight: 500;
+    margin-right: 8px;
+}
+.popular-searches a {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    color: #2563eb;
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    margin: 4px;
+    border: 1px solid #2563eb;
+    transition: all 0.2s ease;
+}
+.popular-searches a:hover {
+    background: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
 main {
     max-width: 1200px;
     margin: 48px auto;
     padding: 0 24px;
 }
 main h2 {
-    font-size: 1.7rem;
+    font-size: 1.9rem; /* --- NEW: Slightly larger --- */
     color: #222;
     margin-bottom: 32px;
-    font-weight: bold;
+    font-weight: 600;
 }
 .tutor-cards {
     display: grid;
@@ -106,13 +160,16 @@ main h2 {
     padding: 0 0 18px 0;
     text-align: left;
     overflow: hidden;
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.3s, transform 0.3s; /* --- UPDATED --- */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
+
+/* --- UPDATED: Homepage Card Hover Effect --- */
 .card:hover {
-    box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+    box-shadow: 0 12px 36px rgba(37,99,235,0.18), 0 4px 16px rgba(0,0,0,0.10);
+    transform: translateY(-6px) scale(1.02);
 }
 .card img {
     width: 100%;
@@ -121,38 +178,63 @@ main h2 {
     border-bottom: 1px solid #eee;
 }
 .card h3 {
-    margin: 18px 0 6px 18px;
-    font-size: 1.15rem;
+    margin: 18px 18px 6px 18px;
+    font-size: 1.25rem; /* --- NEW: Slightly larger --- */
     color: #111;
 }
 .card p {
     margin: 0 0 0 18px;
     color: #444;
     font-size: 1rem;
+    padding-right: 18px; /* --- NEW --- */
 }
 .card .location {
     color: #2563eb;
     font-weight: 500;
+    margin-top: 4px; /* --- NEW --- */
 }
-.stars {
-    color: #FFD700;
-    font-size: 1.2rem;
-    margin: 10px 0 0 18px;
-    letter-spacing: 2px;
+
+/* --- NEW: Styles for badge/tag on homepage card --- */
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 18px;
+    box-sizing: border-box; /* --- NEW --- */
+    margin-top: 10px;
 }
-.feedbacks {
+.card .star-badge {
+    background: #22c55e;
+    color: #fff;
+    border-radius: 8px;
+    padding: 2px 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 1px 4px #22c55e33;
+}
+.card .popular-tag {
+    background: #fff7e0;
+    color: #f59e42;
+    border-radius: 8px;
+    padding: 2px 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 1px 4px #f59e4233;
+}
+.card .feedbacks {
     margin: 6px 0 0 18px;
     color: #888;
     font-size: 0.98rem;
 }
-/* Trusted Platform Section */
+
 .trusted-platform {
     text-align: center;
     margin: 60px 0 40px 0;
 }
 .trusted-platform h2 {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 8px;
 }
 .trusted-platform p {
@@ -178,6 +260,12 @@ main h2 {
     box-sizing: border-box;
     margin-bottom: 18px;
     position: relative;
+    transition: transform 0.3s, box-shadow 0.3s; /* --- NEW --- */
+}
+/* --- NEW: Stat Card Hover --- */
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 .stat-number {
     font-size: 2rem;
@@ -192,15 +280,13 @@ main h2 {
 .stat-img {
     margin-top: 18px;
 }
-
-/* Students Speak / Reviews Slider */
 .reviews-section {
     margin: 60px 0 40px 0;
     text-align: center;
 }
 .reviews-section h2 {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 32px;
     color: #222;
     letter-spacing: 1px;
@@ -271,7 +357,6 @@ main h2 {
     from { opacity: 0; transform: translateY(30px) scale(0.98);}
     to { opacity: 1; transform: translateY(0) scale(1);}
 }
-
 .review-header {
     display: flex;
     align-items: center;
@@ -291,7 +376,7 @@ main h2 {
     transform: scale(1.08) rotate(-2deg);
 }
 .review-name {
-    font-weight: bold;
+    font-weight: 700;
     color: #2563eb;
     font-size: 1.08rem;
     display: block;
@@ -335,9 +420,6 @@ main h2 {
     background: #2563eb;
     color: #fff;
 }
-
-
-/* Footer styles */
 .site-footer {
   background: #2c2041;
   color: #fff;
@@ -361,7 +443,7 @@ main h2 {
 }
 .footer-col h4 {
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 18px;
   letter-spacing: 1px;
   color: #fff;
@@ -494,9 +576,6 @@ main h2 {
         padding: 12px 4px 10px 8px;
     }
 }
-
-
-/* Responsive adjustments */
 @media (max-width: 900px) {
     .tutor-cards {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -590,7 +669,7 @@ main h2 {
 }
 .teacher-name {
   color: #222;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.3rem;
 }
 .teacher-rating {
@@ -664,7 +743,7 @@ main h2 {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s; /* --- UPDATED --- */
   box-shadow: 0 1px 4px #2563eb11;
   display: flex;
   align-items: center;
@@ -676,6 +755,7 @@ main h2 {
 }
 .call-btn:hover {
   background: #16a34a;
+  transform: translateY(-2px); /* --- NEW --- */
 }
 .whatsapp-btn {
   background: #e7fbe7;
@@ -684,13 +764,52 @@ main h2 {
 .whatsapp-btn:hover {
   background: #22c55e;
   color: #fff;
+  transform: translateY(-2px); /* --- NEW --- */
 }
+/* --- UPDATED: Enquiry Button Gradient --- */
 .enquiry-btn {
-  background: #2563eb;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 .enquiry-btn:hover {
-  background: #1746a2;
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+/* ... (Aapka poora purana code) ... */
+
+/* --- NEW CSS FOR CARD LINKS (Add at the end) --- */
+
+/* Yeh homepage ke poore card ko link banata hai */
+.tutor-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Makes the <a> tag behave like the div it's wrapping */
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+/* Homepage card par hover effect */
+.tutor-link .card:hover {
+     box-shadow: 0 12px 36px rgba(37,99,235,0.18), 0 4px 16px rgba(0,0,0,0.10);
+    transform: translateY(-6px) scale(1.02);
+}
+/* Yeh card ke andar (jaise homepage par) .card:hover se conflict kar sakta hai */
+/* Isliye humne hover ko .tutor-link par move kar diya hai */
+.card:hover {
+    /* Remove the old hover if it exists */
+}
+
+
+/* Yeh search page par sirf naam ko link banata hai */
+a.profile-link, a.profile-link:hover, a.profile-link:visited {
+    text-decoration: none;
+    color: inherit;
+}
+/* Jab naam par hover karein (search page) */
+a.profile-link .teacher-name:hover {
+    color: #2563eb;
+    text-decoration: underline;
 }
 @keyframes cardFadeIn {
   from { opacity: 0; transform: translateY(40px) scale(0.98);}
@@ -716,4 +835,13 @@ main h2 {
   .teacher-card {
     padding: 10px 2px;
   }
+}
+
+
+/* ... (Aapka poora purana code) ... */
+
+/* --- NEW CSS FOR IMAGE LINK --- */
+.profile-link-img, .profile-link-img:hover {
+    display: block; /* Ensures the link takes up the block space */
+    text-decoration: none; /* Link se underline hatata hai */
 }

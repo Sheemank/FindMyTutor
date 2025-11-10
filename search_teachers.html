@@ -1,16 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>FindMyTutor</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <nav>
         <div class="logo">FindMyTutor</div>
         <ul>
-            <li><a href="main.html" class="active">Home</a></li>
-            <li><a href="search_teachers.html">Teachers</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search_teachers.html" class="active">Teachers</a></li>
             <li><a href="login_page.html">Login</a></li>
             <li><a href="#">Register</a></li>
         </ul>
@@ -24,248 +24,19 @@
             <button onclick="searchTutors()">Search</button>
         </div>
     </header>
-    <section class="teachers-section" id="teachersSection">
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👩‍🏫</span>
-                    <span class="teacher-name">Priya Sharma</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 4.5</span> <span class="rating-count">128
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Rohini, Delhi, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">Math</span>
-                    <span class="tag subject">Science</span>
-                    <span class="tag exp">5 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Priya Sharma is an expert in Math & Science, known for her interactive teaching style and excellent
-                    results.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Mehta">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👨‍🏫</span>
-                    <span class="teacher-name">Rahul Mehta</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 5.0</span> <span class="rating-count">95
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Andheri, Mumbai, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">English</span>
-                    <span class="tag subject">SST</span>
-                    <span class="tag exp">3 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Rahul Mehta specializes in English & Social Studies, helping students build strong fundamentals and
-                    confidence.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Amit Kumar">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👨‍🏫</span>
-                    <span class="teacher-name">Amit Kumar</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 4.0</span> <span class="rating-count">80
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Gomti Nagar, Lucknow, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">Physics</span>
-                    <span class="tag subject">Math</span>
-                    <span class="tag exp">6 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Amit Kumar is passionate about Physics and Math, making tough concepts easy for students.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Neha Verma">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👩‍🏫</span>
-                    <span class="teacher-name">Neha Verma</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 4.8</span> <span class="rating-count">110
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Banjara Hills, Hyderabad, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">Biology</span>
-                    <span class="tag subject">Chemistry</span>
-                    <span class="tag exp">4 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Neha Verma is known for her friendly approach and deep knowledge in Biology and Chemistry.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
 
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Sharma">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👩‍🏫</span>
-                    <span class="teacher-name">Priya Sharma</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 4.5</span> <span class="rating-count">128
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Rohini, Delhi, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">Math</span>
-                    <span class="tag subject">Science</span>
-                    <span class="tag exp">5 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Priya Sharma is an expert in Math & Science, known for her interactive teaching style and excellent
-                    results.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Mehta">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👨‍🏫</span>
-                    <span class="teacher-name">Rahul Mehta</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 5.0</span> <span class="rating-count">95
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Andheri, Mumbai, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">English</span>
-                    <span class="tag subject">SST</span>
-                    <span class="tag exp">3 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Rahul Mehta specializes in English & Social Studies, helping students build strong fundamentals and
-                    confidence.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Amit Kumar">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👨‍🏫</span>
-                    <span class="teacher-name">Amit Kumar</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 4.0</span> <span class="rating-count">80
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Gomti Nagar, Lucknow, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">Physics</span>
-                    <span class="tag subject">Math</span>
-                    <span class="tag exp">6 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Amit Kumar is passionate about Physics and Math, making tough concepts easy for students.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Neha Verma">
-            </div>
-            <div class="teacher-info">
-                <div class="teacher-header">
-                    <span class="teacher-icon">👩‍🏫</span>
-                    <span class="teacher-name">Neha Verma</span>
-                    <span class="teacher-rating"><span class="star-badge">★ 4.8</span> <span class="rating-count">110
-                            Ratings</span></span>
-                    <span class="teacher-popular">🔥 Popular</span>
-                </div>
-                <div class="teacher-location">🏠 Banjara Hills, Hyderabad, India</div>
-                <div class="teacher-tags">
-                    <span class="tag subject">Biology</span>
-                    <span class="tag subject">Chemistry</span>
-                    <span class="tag exp">4 Years Experience</span>
-                </div>
-                <div class="teacher-desc">
-                    Neha Verma is known for her friendly approach and deep knowledge in Biology and Chemistry.
-                </div>
-                <div class="teacher-actions">
-                    <button class="btn call-btn">📞 Show Number</button>
-                    <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                    <button class="btn enquiry-btn">💬 Send Enquiry</button>
-                </div>
-            </div>
-        </div>
+    <section class="teachers-section" id="teachersListContainer">
+        </section>
 
-    </section>
-    <!-- Reviews Section End -->
-
-    <div style="text-align:center; margin: 32px 0;">
+    <div style="text-align:center; margin: 32px 0;" id="loadMoreContainer">
       <button id="loadMoreTeachers" class="btn enquiry-btn" style="font-size:1.1rem; padding:14px 36px; border-radius:10px; align-items:center;">
         Show More Teachers
       </button>
     </div>
+
     <section class="teachers-section" id="moreTeachersSection" style="display:none; flex-direction:column; gap:32px; max-width:900px; margin:0 auto 40px auto;">
-      <!-- More teachers will be injected here -->
-    </section>
+      </section>
+    
     <footer class="site-footer">
       <div class="footer-main">
         <div class="footer-col">
@@ -349,145 +120,7 @@
         <span class="footer-copy">FindMyTutor &copy; 2025</span>
       </div>
     </footer>
+    <script src="script.js"></script>
+    <script src="data.js"></script>
 </body>
- <script>
-      const moreTeachersData = [
-        {
-          img: "https://randomuser.me/api/portraits/men/34.jpg",
-          name: "Suresh Patel",
-          gender: "👨‍🏫",
-          rating: "4.2",
-          ratings: "72",
-          location: "🏠 Vastrapur, Ahmedabad, India",
-          tags: ["Math", "Science", "8 Years Experience"],
-          desc: "Suresh Patel is dedicated to helping students master Math and Science with practical examples.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/46.jpg",
-          name: "Anjali Nair",
-          gender: "👩‍🏫",
-          rating: "4.7",
-          ratings: "105",
-          location: "🏠 Vyttila, Kochi, India",
-          tags: ["English", "Social Science", "6 Years Experience"],
-          desc: "Anjali Nair makes English and Social Science fun and easy to understand for all students.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/men/35.jpg",
-          name: "Ravi Kumar",
-          gender: "👨‍🏫",
-          rating: "4.0",
-          ratings: "54",
-          location: "🏠 Banjara Hills, Hyderabad, India",
-          tags: ["Science", "Math", "4 Years Experience"],
-          desc: "Ravi Kumar is known for his clear explanations and student-friendly teaching style.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/33.jpg",
-          name: "Pooja Shah",
-          gender: "👩‍🏫",
-          rating: "4.4",
-          ratings: "112",
-          location: "🏠 Navrangpura, Ahmedabad, India",
-          tags: ["Commerce", "Economics", "5 Years Experience"],
-          desc: "Pooja Shah helps students excel in Commerce and Economics with real-world examples.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/men/77.jpg",
-          name: "Arjun Das",
-          gender: "👨‍🏫",
-          rating: "4.3",
-          ratings: "89",
-          location: "🏠 Salt Lake, Kolkata, India",
-          tags: ["History", "Civics", "7 Years Experience"],
-          desc: "Arjun Das brings history to life and makes civics engaging for every learner.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/22.jpg",
-          name: "Divya Kaur",
-          gender: "👩‍🏫",
-          rating: "4.8",
-          ratings: "131",
-          location: "🏠 Sector 62, Noida, India",
-          tags: ["Biology", "Chemistry", "9 Years Experience"],
-          desc: "Divya Kaur inspires students to love Biology and Chemistry with her interactive teaching.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/men/36.jpg",
-          name: "Karan Singh",
-          gender: "👨‍🏫",
-          rating: "4.6",
-          ratings: "99",
-          location: "🏠 Malviya Nagar, Jaipur, India",
-          tags: ["Math", "Physics", "6 Years Experience"],
-          desc: "Karan Singh is passionate about Math and Physics, making tough topics simple.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/47.jpg",
-          name: "Meena Joshi",
-          gender: "👩‍🏫",
-          rating: "4.9",
-          ratings: "142",
-          location: "🏠 MG Road, Pune, India",
-          tags: ["Hindi", "English", "10 Years Experience"],
-          desc: "Meena Joshi is an expert in Hindi and English, helping students achieve top scores.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/men/37.jpg",
-          name: "Sanjay Verma",
-          gender: "👨‍🏫",
-          rating: "4.1",
-          ratings: "61",
-          location: "🏠 Sector 15, Gurugram, India",
-          tags: ["Math", "Science", "5 Years Experience"],
-          desc: "Sanjay Verma focuses on building strong fundamentals in Math and Science.",
-        },
-        {
-          img: "https://randomuser.me/api/portraits/women/48.jpg",
-          name: "Sneha Verma",
-          gender: "👩‍🏫",
-          rating: "4.5",
-          ratings: "120",
-          location: "🏠 Indira Nagar, Lucknow, India",
-          tags: ["Science", "Math", "7 Years Experience"],
-          desc: "Sneha Verma is known for her friendly approach and deep knowledge in Science and Math.",
-        }
-      ];
-
-      document.getElementById('loadMoreTeachers').addEventListener('click', function() {
-        const section = document.getElementById('moreTeachersSection');
-        if (section.style.display === "none") section.style.display = "flex";
-        section.innerHTML = moreTeachersData.map(teacher => `
-          <div class="teacher-card">
-            <div class="teacher-img">
-              <img src="${teacher.img}" alt="${teacher.name}">
-            </div>
-            <div class="teacher-info">
-              <div class="teacher-header">
-                <span class="teacher-icon">${teacher.gender}</span>
-                <span class="teacher-name">${teacher.name}</span>
-                <span class="teacher-rating"><span class="star-badge">★ ${teacher.rating}</span> <span class="rating-count">${teacher.ratings} Ratings</span></span>
-                <span class="teacher-popular">🔥 Popular</span>
-              </div>
-              <div class="teacher-location">${teacher.location}</div>
-              <div class="teacher-tags">
-                <span class="tag subject">${teacher.tags[0]}</span>
-                <span class="tag subject">${teacher.tags[1]}</span>
-                <span class="tag exp">${teacher.tags[2]}</span>
-              </div>
-              <div class="teacher-desc">
-                ${teacher.desc}
-              </div>
-              <div class="teacher-actions">
-                <button class="btn call-btn">📞 Show Number</button>
-                <button class="btn whatsapp-btn">🟢 WhatsApp</button>
-                <button class="btn enquiry-btn">💬 Send Enquiry</button>
-              </div>
-            </div>
-          </div>
-        `).join('');
-        this.style.display = "none";
-        section.scrollIntoView({behavior:"smooth"});
-      });
-    </script>
-<html
+</html>

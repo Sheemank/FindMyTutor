@@ -146,6 +146,12 @@
       overflow: hidden;
       position: relative;
       animation: popIn 0.7s cubic-bezier(.77,0,.18,1);
+      cursor: pointer; 
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .profile-pic-preview:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 22px #a78bfa55;
     }
     .profile-pic-preview img {
       width: 100%;
@@ -158,31 +164,8 @@
       from { opacity: 0; transform: scale(0.7);}
       to { opacity: 1; transform: scale(1);}
     }
-    .profile-pic-upload label {
-      font-weight: 600;
-      color: var(--secondary);
-      margin-bottom: 6px;
-      font-size: 1.08rem;
-      letter-spacing: 0.2px;
-    }
     .profile-pic-upload input[type="file"] {
       display: none;
-    }
-    .upload-btn {
-      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 22px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 6px;
-      transition: background 0.2s, box-shadow 0.2s;
-      box-shadow: 0 2px 8px #a78bfa22;
-    }
-    .upload-btn:hover {
-      background: linear-gradient(90deg, var(--secondary) 60%, var(--primary) 100%);
     }
     .reg-form {
       display: flex;
@@ -206,7 +189,7 @@
       letter-spacing: 0.2px;
     }
     input, select, textarea {
-      width: 100%;
+      width: 95%;
       padding: 13px 12px;
       border: 1.7px solid #d1d5db;
       border-radius: 10px;
@@ -227,23 +210,42 @@
       min-height: 60px;
       resize: vertical;
     }
-    select[multiple] {
-      min-height: 90px;
-      background: #f3f6fd;
-      border: 1.7px solid #a5b4fc;
-      font-size: 1rem;
-      color: #3730a3;
-      padding: 10px;
+    
+    /* --- REMOVED select[multiple] styles --- */
+    
+    /* --- ADDED FOR SUBJECTS LIST --- */
+    #subjectSearch {
+      margin-bottom: 8px; /* Space between search and list */
+    }
+    .subjects-container {
+      max-height: 180px; /* Make it scrollable */
+      overflow-y: auto;
+      border: 1.7px solid #d1d5db; /* Match other inputs */
       border-radius: 10px;
-      margin-bottom: 18px;
-      box-shadow: 0 1px 4px #2563eb0a;
-      transition: border 0.2s, box-shadow 0.2s;
+      padding: 10px;
+      background: #f8fafc; /* Match other inputs */
+      margin-bottom: 18px; /* Match other inputs */
     }
-    select[multiple]:focus {
-      border: 1.7px solid var(--secondary);
-      background: #fff;
-      box-shadow: 0 2px 8px #7c3aed22;
+    .subjects-container label {
+      display: block; /* Each checkbox on its own line */
+      padding: 6px 8px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.15s;
+      font-weight: 500; /* Lighter than main labels */
+      color: #333;
     }
+    .subjects-container label:hover {
+      background-color: #ede9fe; /* Use a theme color */
+    }
+    .subjects-container label input[type="checkbox"] {
+      /* Override global styles for 'input' */
+      width: auto;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+    /* --- END OF ADDED STYLES --- */
+
     .submit-btn {
       width: 100%;
       padding: 15px 0;
@@ -305,18 +307,16 @@
         <button class="reg-tab active" id="studentTab" type="button">Student</button>
         <button class="reg-tab" id="teacherTab" type="button">Teacher</button>
       </div>
-      <!-- Student Registration Form -->
       <form id="studentForm" class="reg-form active" enctype="multipart/form-data" autocomplete="on">
-        <div class="reg-title">Student Registration Form</div>
+        
         <div class="profile-pic-upload">
-          <div class="profile-pic-preview" id="studentPhotoPreviewBox">
+          <div class="profile-pic-preview" id="studentPhotoPreviewBox" onclick="document.getElementById('studentPhoto').click()" title="Click to upload profile photo">
             <span id="studentPhotoPreviewText">Profile Preview</span>
             <img id="studentPhotoPreview" src="" alt="Preview" style="display:none;">
           </div>
-          <label for="studentPhoto">Upload Photo</label>
-          <input type="file" id="studentPhoto" accept="image/*" required>
-          <button type="button" class="upload-btn" onclick="document.getElementById('studentPhoto').click()">Choose Photo</button>
+          <input type="file" id="studentPhoto" accept="image/*">
         </div>
+        
         <div class="form-row">
           <div>
             <label for="studentName">Full Name</label>
@@ -330,7 +330,7 @@
         <div class="form-row">
           <div>
             <label for="studentPhone">Phone Number</label>
-            <input type="tel" id="studentPhone" name="studentPhone" pattern="[0-9]{10}" maxlength="10" required placeholder="Enter phone number">
+            <input type="tel" id="studentPhone" name="studentPhone" pattern="[0-9]{10}" maxlength="10" placeholder="Enter phone number">
           </div>
           <div>
             <label for="studentClass">Class</label>
@@ -338,48 +338,35 @@
           </div>
         </div>
         <div class="form-row">
-          <div>
-            <label for="studentAge">Age</label>
-            <input type="number" id="studentAge" name="studentAge" min="3" max="25" required>
-          </div>
+          
           <div>
             <label for="studentGender">Gender</label>
             <select id="studentGender" name="studentGender" required>
               <option value="">Select</option>
               <option>Male</option>
               <option>Female</option>
-              <option>Other</option>
             </select>
           </div>
         </div>
         <div class="form-row">
-          <div>
-            <label for="studentSchool">School Name</label>
-            <input type="text" id="studentSchool" name="studentSchool" required placeholder="School Name">
-          </div>
+          
           <div>
             <label for="studentLocation">Location</label>
-            <input type="text" id="studentLocation" name="studentLocation" required placeholder="City, State">
+            <input type="text" id="studentLocation" name="studentLocation" placeholder="City, State">
           </div>
         </div>
-        <label for="studentLiveLocation">Live Location (Google Maps Link)</label>
-        <input type="url" id="studentLiveLocation" name="studentLiveLocation" required placeholder="Paste Google Maps link">
-        <label for="studentDescription">Description</label>
-        <textarea id="studentDescription" name="studentDescription" required placeholder="Describe yourself, your goals, etc."></textarea>
         <button type="submit" class="submit-btn">Register as Student</button>
       </form>
-      <!-- Teacher Registration Form -->
       <form id="teacherForm" class="reg-form" enctype="multipart/form-data" autocomplete="on" style="display:none;">
-        <div class="reg-title">Teacher Registration Form</div>
+
         <div class="profile-pic-upload">
-          <div class="profile-pic-preview" id="teacherPhotoPreviewBox">
+          <div class="profile-pic-preview" id="teacherPhotoPreviewBox" onclick="document.getElementById('teacherPhoto').click()" title="Click to upload profile photo">
             <span id="teacherPhotoPreviewText">Profile Preview</span>
             <img id="teacherPhotoPreview" src="" alt="Preview" style="display:none;">
           </div>
-          <label for="teacherPhoto">Upload Photo</label>
-          <input type="file" id="teacherPhoto" accept="image/*" required>
-          <button type="button" class="upload-btn" onclick="document.getElementById('teacherPhoto').click()">Choose Photo</button>
+          <input type="file" id="teacherPhoto" accept="image/*">
         </div>
+        
         <div class="form-row">
           <div>
             <label for="teacherName">Full Name</label>
@@ -395,24 +382,39 @@
             <label for="teacherPhone">Phone Number</label>
             <input type="tel" id="teacherPhone" name="teacherPhone" pattern="[0-9]{10}" maxlength="10" required placeholder="Enter phone number">
           </div>
+          
           <div>
-            <label for="teacherSubjects">Subjects You Teach <span style="color:#7c3aed;font-size:0.97em;">(Hold Ctrl/Cmd for multiple)</span></label>
-            <select id="teacherSubjects" name="teacherSubjects" multiple required>
-              <option>Math</option>
-              <option>Science</option>
-              <option>English</option>
-              <option>Hindi</option>
-              <option>Social Science</option>
-              <option>Physics</option>
-              <option>Chemistry</option>
-              <option>Biology</option>
-              <option>Computer</option>
-              <option>Commerce</option>
-              <option>Economics</option>
-              <option>Other</option>
-            </select>
+            <label for="subjectSearch">Subjects You Teach</label>
+            <input type="text" id="subjectSearch" placeholder="Search for subjects...">
+            <div class="subjects-container" id="subjectsList">
+              <label><input type="checkbox" name="teacherSubjects" value="Math"> Math</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Physics"> Physics</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Chemistry"> Chemistry</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Biology"> Biology</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Science"> Science (Classes 6-10)</label>
+              <label><input type="checkbox" name="teacherSubjects" value="English"> English</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Hindi"> Hindi</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Sanskrit"> Sanskrit</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Social Science (SST)"> Social Science (SST)</label>
+              <label><input type="checkbox" name="teacherSubjects" value="History"> History</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Geography"> Geography</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Political Science (Civics)"> Political Science (Civics)</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Economics"> Economics</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Accountancy"> Accountancy</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Business Studies"> Business Studies</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Computer Science / IT"> Computer Science / IT</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Psychology"> Psychology</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Sociology"> Sociology</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Physical Education"> Physical Education</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Home Science"> Home Science</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Urdu"> Urdu</label>
+              <label><input type="checkbox" name="teacherSubjects" value="French"> French</label>
+              <label><input type="checkbox" name="teacherSubjects" value="German"> German</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Other Language"> Other Language</label>
+              <label><input type="checkbox" name="teacherSubjects" value="Other"> Other</label>
+            </div>
           </div>
-        </div>
+          </div>
         <div class="form-row">
           <div>
             <label for="teacherExperience">Years of Experience</label>
@@ -449,6 +451,7 @@
     const teacherTab = document.getElementById('teacherTab');
     const studentForm = document.getElementById('studentForm');
     const teacherForm = document.getElementById('teacherForm');
+    
     studentTab.onclick = () => {
       studentTab.classList.add('active');
       teacherTab.classList.remove('active');
@@ -462,38 +465,52 @@
       studentForm.style.display = 'none';
     };
 
-    // Student photo preview
-    document.getElementById('studentPhoto').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      const preview = document.getElementById('studentPhotoPreview');
-      const previewBox = document.getElementById('studentPhotoPreviewBox');
-      const previewText = document.getElementById('studentPhotoPreviewText');
-      if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = "block";
-        previewText.style.display = "none";
-      } else {
-        preview.src = "";
-        preview.style.display = "none";
-        previewText.style.display = "block";
+    // --- REFINED JAVASCRIPT ---
+    // Reusable photo preview function
+    function setupPhotoPreview(inputId, previewImgId, previewTextId) {
+      document.getElementById(inputId).addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById(previewImgId);
+        const previewText = document.getElementById(previewTextId);
+        
+        if (file) {
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = "block";
+          previewText.style.display = "none";
+        } else {
+          preview.src = "";
+          preview.style.display = "none";
+          previewText.style.display = "block";
+        }
+      });
+    }
+
+    // Set up both previews
+    setupPhotoPreview('studentPhoto', 'studentPhotoPreview', 'studentPhotoPreviewText');
+    setupPhotoPreview('teacherPhoto', 'teacherPhotoPreview', 'teacherPhotoPreviewText');
+
+    
+    // --- ADDED FOR SUBJECT FILTERING ---
+    function filterSubjects() {
+      const searchInput = document.getElementById('subjectSearch');
+      const filter = searchInput.value.toLowerCase();
+      const list = document.getElementById('subjectsList');
+      const labels = list.getElementsByTagName('label');
+
+      for (let i = 0; i < labels.length; i++) {
+        const label = labels[i];
+        const text = label.textContent || label.innerText;
+        if (text.toLowerCase().indexOf(filter) > -1) {
+          label.style.display = ""; // Show
+        } else {
+          label.style.display = "none"; // Hide
+        }
       }
-    });
-    // Teacher photo preview
-    document.getElementById('teacherPhoto').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      const preview = document.getElementById('teacherPhotoPreview');
-      const previewBox = document.getElementById('teacherPhotoPreviewBox');
-      const previewText = document.getElementById('teacherPhotoPreviewText');
-      if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = "block";
-        previewText.style.display = "none";
-      } else {
-        preview.src = "";
-        preview.style.display = "none";
-        previewText.style.display = "block";
-      }
-    });
+    }
+    
+    // Add the listener to the search box
+    document.getElementById('subjectSearch').addEventListener('keyup', filterSubjects);
+
 
     // Prevent default submit (demo)
     studentForm.onsubmit = function(e) {
@@ -503,12 +520,26 @@
       document.getElementById('studentPhotoPreview').style.display = "none";
       document.getElementById('studentPhotoPreviewText').style.display = "block";
     };
+    
     teacherForm.onsubmit = function(e) {
       e.preventDefault();
+      
+      // --- ADDED VALIDATION FOR CHECKBOXES ---
+      const subjects = teacherForm.querySelectorAll('input[name="teacherSubjects"]:checked');
+      if (subjects.length === 0) {
+        alert("Please select at least one subject you teach.");
+        document.getElementById('subjectSearch').focus(); // Focus on the search box
+        return; // Stop the submission
+      }
+      // --- END OF VALIDATION ---
+      
       alert("Teacher registration submitted!\n(Backend integration required)");
       teacherForm.reset();
       document.getElementById('teacherPhotoPreview').style.display = "none";
       document.getElementById('teacherPhotoPreviewText').style.display = "block";
+      
+      // Manually call filter to reset the list view
+      filterSubjects();
     };
   </script>
 </body>

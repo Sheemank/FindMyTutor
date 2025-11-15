@@ -1,546 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Register | FindMyTutor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #7c3aed;
-      --accent: #a78bfa;
-      --bg-light: #f8fafc;
-      --radius: 18px;
-    }
-    body {
-      background: radial-gradient(circle at 50% 30%, #ede9fe 0%, #f3f6fd 100%);
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-    }
-    .navbar {
-      width: 100%;
-      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
-      color: #fff;
-      padding: 0 0 0 0;
-      box-shadow: 0 2px 8px #7c3aed22;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 60px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .navbar .logo {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-left: 32px;
-      color: #fff;
-      text-shadow: 0 2px 8px #2563eb33;
-    }
-    .navbar .nav-links {
-      display: flex;
-      gap: 32px;
-      margin-right: 32px;
-    }
-    .navbar .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.08rem;
-      font-weight: 500;
-      transition: color 0.18s;
-      position: relative;
-    }
-    .navbar .nav-links a:hover {
-      color: #fbbf24;
-    }
-    .main-form-section {
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 40px 0 40px 0;
-    }
-    .reg-card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 8px 40px 0 #a78bfa22, 0 2px 8px #7c3aed11;
-      max-width: 700px;
-      width: 98vw;
-      margin: 0 auto;
-      padding: 38px 32px 32px 32px;
-      position: relative;
-      z-index: 1;
-      animation: fadeInReg 1.2s cubic-bezier(.77,0,.18,1);
-    }
-    @keyframes fadeInReg {
-      from { opacity: 0; transform: translateY(60px) scale(0.97);}
-      to { opacity: 1; transform: translateY(0) scale(1);}
-    }
-    .reg-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      margin-bottom: 28px;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #f3f6fd;
-      box-shadow: 0 1px 4px #2563eb11;
-    }
-    .reg-tab {
-      flex: 1;
-      padding: 14px 0;
-      text-align: center;
-      font-size: 1.13rem;
-      font-weight: 600;
-      color: #7c3aed;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s;
-      outline: none;
-      letter-spacing: 0.5px;
-    }
-    .reg-tab.active {
-      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
-      color: #fff;
-      font-weight: 700;
-      box-shadow: 0 2px 8px #2563eb22;
-      border-radius: 0;
-      position: relative;
-      z-index: 2;
-    }
-    .reg-title {
-      text-align: center;
-      font-size: 2.1rem;
-      font-weight: 800;
-      color: var(--secondary);
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .profile-pic-upload {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 30px;
-      margin-top: 10px;
-    }
-    .profile-pic-preview {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #ede9fe;
-      border: 4px solid #a78bfa;
-      box-shadow: 0 4px 18px #a78bfa33;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      font-size: 1.08rem;
-      color: #a78bfa;
-      overflow: hidden;
-      position: relative;
-      animation: popIn 0.7s cubic-bezier(.77,0,.18,1);
-      cursor: pointer; 
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .profile-pic-preview:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 22px #a78bfa55;
-    }
-    .profile-pic-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      display: block;
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.7);}
-      to { opacity: 1; transform: scale(1);}
-    }
-    .profile-pic-upload input[type="file"] {
-      display: none;
-    }
-    .reg-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 0;
-    }
-    .form-row {
-      display: flex;
-      gap: 18px;
-      margin-bottom: 0;
-    }
-    .form-row > div {
-      flex: 1;
-    }
-    label {
-      font-weight: 600;
-      color: #7c3aed;
-      margin-bottom: 4px;
-      display: block;
-      letter-spacing: 0.2px;
-    }
-    input, select, textarea {
-      width: 95%;
-      padding: 13px 12px;
-      border: 1.7px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 1.07rem;
-      margin-bottom: 18px;
-      background: #f8fafc;
-      transition: border 0.2s, box-shadow 0.2s;
-      font-family: inherit;
-      box-shadow: 0 1px 4px #2563eb0a;
-    }
-    input:focus, select:focus, textarea:focus {
-      border: 1.7px solid var(--secondary);
-      outline: none;
-      background: #fff;
-      box-shadow: 0 2px 8px #7c3aed22;
-    }
-    textarea {
-      min-height: 60px;
-      resize: vertical;
-    }
-    
-    /* --- REMOVED select[multiple] styles --- */
-    
-    /* --- ADDED FOR SUBJECTS LIST --- */
-    #subjectSearch {
-      margin-bottom: 8px; /* Space between search and list */
-    }
-    .subjects-container {
-      max-height: 180px; /* Make it scrollable */
-      overflow-y: auto;
-      border: 1.7px solid #d1d5db; /* Match other inputs */
-      border-radius: 10px;
-      padding: 10px;
-      background: #f8fafc; /* Match other inputs */
-      margin-bottom: 18px; /* Match other inputs */
-    }
-    .subjects-container label {
-      display: block; /* Each checkbox on its own line */
-      padding: 6px 8px;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background-color 0.15s;
-      font-weight: 500; /* Lighter than main labels */
-      color: #333;
-    }
-    .subjects-container label:hover {
-      background-color: #ede9fe; /* Use a theme color */
-    }
-    .subjects-container label input[type="checkbox"] {
-      /* Override global styles for 'input' */
-      width: auto;
-      margin-bottom: 0;
-      margin-right: 10px;
-    }
-    /* --- END OF ADDED STYLES --- */
-
-    .submit-btn {
-      width: 100%;
-      padding: 15px 0;
-      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
-      color: #fff;
-      font-size: 1.15rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
-      box-shadow: 0 2px 8px #2563eb22;
-      letter-spacing: 0.5px;
-      position: relative;
-      z-index: 1;
-    }
-    .submit-btn:hover {
-      background: linear-gradient(90deg, var(--secondary) 60%, var(--primary) 100%);
-      box-shadow: 0 6px 18px #7c3aed33;
-      transform: translateY(-2px) scale(1.03);
-    }
-    @media (max-width: 900px) {
-      .reg-card {
-        max-width: 99vw;
-        padding: 18px 2vw 18px 2vw;
-      }
-      .main-form-section {
-        padding: 20px 0 20px 0;
-      }
-    }
-    @media (max-width: 600px) {
-      .form-row {
-        flex-direction: column;
-        gap: 0;
-      }
-      .reg-card {
-        padding: 10px 2vw 10px 2vw;
-      }
-      .profile-pic-preview {
-        width: 80px;
-        height: 80px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>FindMyTutor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">FindMyTutor</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="search_teachers.html">Teachers</a>
-      
+    <nav>
+        <div class="logo">FindMyTutor</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search_teachers.html" class="active">Teachers</a></li>
+            <li><a href="login_page.html">Login</a></li>
+            <li><a href="register_student_teacher.html">Register</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Find The Best Tutors Near You</h1>
+        <p>Connect with experienced tuition teachers in your area for online or offline classes.</p>
+        <div class="search-bar">
+            <input type="text" id="location" placeholder="Enter your location">
+            <input type="text" id="subject" placeholder="Subject (e.g. Math, Science)">
+            <button onclick="searchTutors()">Search</button>
+        </div>
+    </header>
+
+    <section class="teachers-section" id="teachersListContainer">
+        </section>
+
+    <div style="text-align:center; margin: 32px 0;" id="loadMoreContainer">
+      <button id="loadMoreTeachers" class="btn enquiry-btn" style="font-size:1.1rem; padding:14px 36px; border-radius:10px; align-items:center;">
+        Show More Teachers
+      </button>
     </div>
-  </div>
-  <section class="main-form-section">
-    <div class="reg-card">
-      <div class="reg-tabs">
-        <button class="reg-tab active" id="studentTab" type="button">Student</button>
-        <button class="reg-tab" id="teacherTab" type="button">Teacher</button>
+
+    <section class="teachers-section" id="moreTeachersSection" style="display:none; flex-direction:column; gap:32px; max-width:900px; margin:0 auto 40px auto;">
+      </section>
+    
+    <footer class="site-footer">
+      <div class="footer-main">
+        <div class="footer-col">
+          <h4>OUR APP</h4>
+          <p>FindMyTutor: The Learning App</p>
+          <a href="#"
+            ><img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+              alt="Get it on Google Play"
+              class="play-badge"
+          /></a>
+        </div>
+        <div class="footer-col">
+          <h4>POPULAR SUBJECTS</h4>
+          <ul>
+            <li><a href="#">Maths Tuition</a></li>
+            <li><a href="#">Science Tuition</a></li>
+            <li><a href="#">English Tuition</a></li>
+            <li><a href="#">Commerce Tuition</a></li>
+            <li><a href="#">Computer Coding</a></li>
+            <li><a href="#">Spoken English</a></li>
+            <li><a href="#">Olympiad Prep</a></li>
+            <li><a href="#">Competitive Exams</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CLASSES & BOARDS</h4>
+          <ul>
+            <li><a href="#">CBSE Tuition</a></li>
+            <li><a href="#">ICSE Tuition</a></li>
+            <li><a href="#">State Board Tuition</a></li>
+            <li><a href="#">Class 1-5</a></li>
+            <li><a href="#">Class 6-8</a></li>
+            <li><a href="#">Class 9-10</a></li>
+            <li><a href="#">Class 11-12</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>CONTACT US</h4>
+          <p>
+            FindMyTutor Edutech Pvt. Ltd.<br />
+            2nd Floor, Knowledge Tower,<br />
+            Sector 62, Noida, Uttar Pradesh 201309<br />
+            <a href="mailto:support@findmytutor.com" class="footer-mail"
+              >support@findmytutor.com</a
+            >
+          </p>
+          <div class="footer-social">
+            <a href="#"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
+                alt="YouTube"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
+                alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg"
+                alt="Twitter"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg"
+                alt="Email"
+            /></a>
+          </div>
+        </div>
       </div>
-      <form id="studentForm" class="reg-form active" enctype="multipart/form-data" autocomplete="on">
-        
-        <div class="profile-pic-upload">
-          <div class="profile-pic-preview" id="studentPhotoPreviewBox" onclick="document.getElementById('studentPhoto').click()" title="Click to upload profile photo">
-            <span id="studentPhotoPreviewText">Profile Preview</span>
-            <img id="studentPhotoPreview" src="" alt="Preview" style="display:none;">
-          </div>
-          <input type="file" id="studentPhoto" accept="image/*">
-        </div>
-        
-        <div class="form-row">
-          <div>
-            <label for="studentName">Full Name</label>
-            <input type="text" id="studentName" name="studentName" required placeholder="Enter full name">
-          </div>
-          <div>
-            <label for="studentEmail">Email</label>
-            <input type="email" id="studentEmail" name="studentEmail" required placeholder="Enter email address">
-          </div>
-        </div>
-        <div class="form-row">
-          <div>
-            <label for="studentPhone">Phone Number</label>
-            <input type="tel" id="studentPhone" name="studentPhone" pattern="[0-9]{10}" maxlength="10" placeholder="Enter phone number">
-          </div>
-          <div>
-            <label for="studentClass">Class</label>
-            <input type="text" id="studentClass" name="studentClass" required placeholder="e.g. 10th">
-          </div>
-        </div>
-        <div class="form-row">
-          
-          <div>
-            <label for="studentGender">Gender</label>
-            <select id="studentGender" name="studentGender" required>
-              <option value="">Select</option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          
-          <div>
-            <label for="studentLocation">Location</label>
-            <input type="text" id="studentLocation" name="studentLocation" placeholder="City, State">
-          </div>
-        </div>
-        <button type="submit" class="submit-btn">Register as Student</button>
-      </form>
-      <form id="teacherForm" class="reg-form" enctype="multipart/form-data" autocomplete="on" style="display:none;">
-
-        <div class="profile-pic-upload">
-          <div class="profile-pic-preview" id="teacherPhotoPreviewBox" onclick="document.getElementById('teacherPhoto').click()" title="Click to upload profile photo">
-            <span id="teacherPhotoPreviewText">Profile Preview</span>
-            <img id="teacherPhotoPreview" src="" alt="Preview" style="display:none;">
-          </div>
-          <input type="file" id="teacherPhoto" accept="image/*">
-        </div>
-        
-        <div class="form-row">
-          <div>
-            <label for="teacherName">Full Name</label>
-            <input type="text" id="teacherName" name="teacherName" required placeholder="Enter full name">
-          </div>
-          <div>
-            <label for="teacherEmail">Email</label>
-            <input type="email" id="teacherEmail" name="teacherEmail" required placeholder="Enter email address">
-          </div>
-        </div>
-        <div class="form-row">
-          <div>
-            <label for="teacherPhone">Phone Number</label>
-            <input type="tel" id="teacherPhone" name="teacherPhone" pattern="[0-9]{10}" maxlength="10" required placeholder="Enter phone number">
-          </div>
-          
-          <div>
-            <label for="subjectSearch">Subjects You Teach</label>
-            <input type="text" id="subjectSearch" placeholder="Search for subjects...">
-            <div class="subjects-container" id="subjectsList">
-              <label><input type="checkbox" name="teacherSubjects" value="Math"> Math</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Physics"> Physics</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Chemistry"> Chemistry</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Biology"> Biology</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Science"> Science (Classes 6-10)</label>
-              <label><input type="checkbox" name="teacherSubjects" value="English"> English</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Hindi"> Hindi</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Sanskrit"> Sanskrit</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Social Science (SST)"> Social Science (SST)</label>
-              <label><input type="checkbox" name="teacherSubjects" value="History"> History</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Geography"> Geography</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Political Science (Civics)"> Political Science (Civics)</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Economics"> Economics</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Accountancy"> Accountancy</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Business Studies"> Business Studies</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Computer Science / IT"> Computer Science / IT</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Psychology"> Psychology</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Sociology"> Sociology</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Physical Education"> Physical Education</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Home Science"> Home Science</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Urdu"> Urdu</label>
-              <label><input type="checkbox" name="teacherSubjects" value="French"> French</label>
-              <label><input type="checkbox" name="teacherSubjects" value="German"> German</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Other Language"> Other Language</label>
-              <label><input type="checkbox" name="teacherSubjects" value="Other"> Other</label>
-            </div>
-          </div>
-          </div>
-        <div class="form-row">
-          <div>
-            <label for="teacherExperience">Years of Experience</label>
-            <input type="number" id="teacherExperience" name="teacherExperience" min="0" max="60" required placeholder="Enter number of years">
-          </div>
-          <div>
-            <label for="teacherLocation">Location</label>
-            <input type="text" id="teacherLocation" name="teacherLocation" required placeholder="City, State">
-          </div>
-        </div>
-        <div class="form-row">
-          <div>
-            <label for="teacherHighschool">High School Marks (%)</label>
-            <input type="number" id="teacherHighschool" name="teacherHighschool" min="0" max="100" required>
-          </div>
-          <div>
-            <label for="teacherTwelve">12th Marks (%)</label>
-            <input type="number" id="teacherTwelve" name="teacherTwelve" min="0" max="100" required>
-          </div>
-        </div>
-        <label for="teacherLiveLocation">Live Location (Google Maps Link)</label>
-        <input type="url" id="teacherLiveLocation" name="teacherLiveLocation" required placeholder="Paste Google Maps link">
-        <label for="teacherRange">Teach Range for Students (in km)</label>
-        <input type="number" id="teacherRange" name="teacherRange" min="1" max="100" required placeholder="e.g. 5">
-        <label for="teacherDescription">Description</label>
-        <textarea id="teacherDescription" name="teacherDescription" required placeholder="Describe your teaching style, achievements, etc."></textarea>
-        <button type="submit" class="submit-btn">Register as Teacher</button>
-      </form>
-    </div>
-  </section>
-  <script>
-    // Tab switching
-    const studentTab = document.getElementById('studentTab');
-    const teacherTab = document.getElementById('teacherTab');
-    const studentForm = document.getElementById('studentForm');
-    const teacherForm = document.getElementById('teacherForm');
-    
-    studentTab.onclick = () => {
-      studentTab.classList.add('active');
-      teacherTab.classList.remove('active');
-      studentForm.style.display = '';
-      teacherForm.style.display = 'none';
-    };
-    teacherTab.onclick = () => {
-      teacherTab.classList.add('active');
-      studentTab.classList.remove('active');
-      teacherForm.style.display = '';
-      studentForm.style.display = 'none';
-    };
-
-    // --- REFINED JAVASCRIPT ---
-    // Reusable photo preview function
-    function setupPhotoPreview(inputId, previewImgId, previewTextId) {
-      document.getElementById(inputId).addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById(previewImgId);
-        const previewText = document.getElementById(previewTextId);
-        
-        if (file) {
-          preview.src = URL.createObjectURL(file);
-          preview.style.display = "block";
-          previewText.style.display = "none";
-        } else {
-          preview.src = "";
-          preview.style.display = "none";
-          previewText.style.display = "block";
-        }
-      });
-    }
-
-    // Set up both previews
-    setupPhotoPreview('studentPhoto', 'studentPhotoPreview', 'studentPhotoPreviewText');
-    setupPhotoPreview('teacherPhoto', 'teacherPhotoPreview', 'teacherPhotoPreviewText');
-
-    
-    // --- ADDED FOR SUBJECT FILTERING ---
-    function filterSubjects() {
-      const searchInput = document.getElementById('subjectSearch');
-      const filter = searchInput.value.toLowerCase();
-      const list = document.getElementById('subjectsList');
-      const labels = list.getElementsByTagName('label');
-
-      for (let i = 0; i < labels.length; i++) {
-        const label = labels[i];
-        const text = label.textContent || label.innerText;
-        if (text.toLowerCase().indexOf(filter) > -1) {
-          label.style.display = ""; // Show
-        } else {
-          label.style.display = "none"; // Hide
-        }
-      }
-    }
-    
-    // Add the listener to the search box
-    document.getElementById('subjectSearch').addEventListener('keyup', filterSubjects);
-
-
-    // Prevent default submit (demo)
-    studentForm.onsubmit = function(e) {
-      e.preventDefault();
-      alert("Student registration submitted!\n(Backend integration required)");
-      studentForm.reset();
-      document.getElementById('studentPhotoPreview').style.display = "none";
-      document.getElementById('studentPhotoPreviewText').style.display = "block";
-    };
-    
-    teacherForm.onsubmit = function(e) {
-      e.preventDefault();
-      
-      // --- ADDED VALIDATION FOR CHECKBOXES ---
-      const subjects = teacherForm.querySelectorAll('input[name="teacherSubjects"]:checked');
-      if (subjects.length === 0) {
-        alert("Please select at least one subject you teach.");
-        document.getElementById('subjectSearch').focus(); // Focus on the search box
-        return; // Stop the submission
-      }
-      // --- END OF VALIDATION ---
-      
-      alert("Teacher registration submitted!\n(Backend integration required)");
-      teacherForm.reset();
-      document.getElementById('teacherPhotoPreview').style.display = "none";
-      document.getElementById('teacherPhotoPreviewText').style.display = "block";
-      
-      // Manually call filter to reset the list view
-      filterSubjects();
-    };
-  </script>
+      <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Authors</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Sitemap</a>
+        <a href="#">Careers</a>
+        <span class="footer-copy">FindMyTutor &copy; 2025</span>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="data.js"></script>
 </body>
 </html>

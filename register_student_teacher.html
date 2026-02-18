@@ -2,125 +2,665 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FindMyTutor</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Register | FindMyTutor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts + Font Awesome (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- reuse global styles from style.css (simplified) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+            font-family: 'Poppins', sans-serif;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 32px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #222;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        nav ul li a.active, nav ul li a:hover {
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            background-color: #eef2ff;
+        }
+
+        /* registration container */
+        .register-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .register-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px rgba(80, 80, 160, 0.13);
+            padding: 38px 32px;
+            width: 100%;
+            max-width: 550px;
+            animation: fadeInUp 0.8s cubic-bezier(.77,0,.18,1);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .register-card h2 {
+            margin-bottom: 24px;
+            color: #2563eb;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+        .register-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 24px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f3f6fd;
+        }
+        .register-tab {
+            flex: 1;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #7c3aed;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s;
+        }
+        .register-tab.active {
+            background: linear-gradient(90deg, #2563eb 60%, #7c3aed 100%);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 2px 8px #2563eb22;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 6px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 10px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: border 0.2s;
+            font-family: 'Lato', sans-serif;
+        }
+        input:focus, textarea:focus, select:focus {
+            border: 1.5px solid #7c3aed;
+            outline: none;
+            background: #fff;
+        }
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            font-size: 1rem;
+            background: linear-gradient(90deg, #2563eb 60%, #7c3aed 100%);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: rgba(37,99,235,0.1);
+            transform: translateY(-2px);
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .btn-group .btn {
+            flex: 1;
+        }
+        .teacher-level {
+            display: none;
+        }
+        .teacher-level.active-level {
+            display: block;
+        }
+        .level-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .level-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d1d5db;
+            transition: background 0.3s;
+        }
+        .level-dot.active {
+            background: #2563eb;
+        }
+        .error-msg, .success-msg {
+            border-radius: 7px;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            text-align: center;
+            display: none;
+        }
+        .error-msg {
+            color: #e11d48;
+            background: #fee2e2;
+        }
+        .success-msg {
+            color: #22c55e;
+            background: #dcfce7;
+        }
+        footer.site-footer {
+            background: #2c2041;
+            color: #fff;
+            padding: 48px 0 0 0;
+            margin-top: 40px;
+        }
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto 18px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+        .footer-col h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: #fff; text-decoration: none; }
+        .footer-col ul li a:hover { color: #ffd700; }
+        .footer-links {
+            border-top: 1px solid #4b3c5c;
+            padding: 18px 0;
+            text-align: center;
+            font-size: 0.98rem;
+        }
+        .footer-links a { color: #fff; margin: 0 10px; text-decoration: none; }
+        .footer-links a:hover { color: #ffd700; }
+        .footer-copy { margin-left: 18px; color: #ffd700; }
+        @media (max-width: 600px) {
+            nav { flex-direction: column; gap: 16px; padding: 16px; }
+            .register-card { padding: 24px 16px; }
+        }
+    </style>
 </head>
 <body>
     <nav>
         <div class="logo">FindMyTutor</div>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="search_teachers.html" class="active">Teachers</a></li>
+            <li><a href="search_teachers.html">Teachers</a></li>
             <li><a href="login_page.html">Login</a></li>
-            <li><a href="register_student_teacher.html">Register</a></li>
+            <li><a href="register_student_teacher.html" class="active">Register</a></li>
         </ul>
     </nav>
-    <header>
-        <h1>Find The Best Tutors Near You</h1>
-        <p>Connect with experienced tuition teachers in your area for online or offline classes.</p>
-        <div class="search-bar">
-            <input type="text" id="location" placeholder="Enter your location">
-            <input type="text" id="subject" placeholder="Subject (e.g. Math, Science)">
-            <button onclick="searchTutors()">Search</button>
+
+    <div class="register-wrapper">
+        <div class="register-card">
+            <h2><i class="fas fa-user-plus"></i> Register</h2>
+
+            <!-- Tabs -->
+            <div class="register-tabs">
+                <button class="register-tab active" id="studentTab">Student</button>
+                <button class="register-tab" id="teacherTab">Teacher</button>
+            </div>
+
+            <!-- Error / Success messages -->
+            <div id="registerError" class="error-msg"></div>
+            <div id="registerSuccess" class="success-msg"></div>
+
+            <!-- Student Registration Form (single step) -->
+            <form id="studentForm" style="display: block;">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Full Name *</label>
+                    <input type="text" id="studentName" placeholder="e.g. Rahul Sharma" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email *</label>
+                    <input type="email" id="studentEmail" placeholder="rahul@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Mobile *</label>
+                    <input type="tel" id="studentPhone" placeholder="10-digit mobile" pattern="[0-9]{10}" maxlength="10" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Location *</label>
+                    <input type="text" id="studentLocation" placeholder="e.g. Lucknow" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-graduation-cap"></i> Grade / Class *</label>
+                    <select id="studentGrade" required>
+                        <option value="">Select class</option>
+                        <option>Class 5</option><option>Class 6</option><option>Class 7</option>
+                        <option>Class 8</option><option>Class 9</option><option>Class 10</option>
+                        <option>Class 11</option><option>Class 12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-book"></i> Subjects needed *</label>
+                    <input type="text" id="studentSubjects" placeholder="e.g. Maths, Science" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password *</label>
+                    <input type="password" id="studentPassword" placeholder="Minimum 6 characters" minlength="6" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Register as Student</button>
+            </form>
+
+            <!-- Teacher Registration Form (multi-step) -->
+            <form id="teacherForm" style="display: none;">
+                <!-- Level indicators -->
+                <div class="level-indicator" id="levelIndicator">
+                    <span class="level-dot active"></span>
+                    <span class="level-dot"></span>
+                    <span class="level-dot"></span>
+                </div>
+
+                <!-- Level 1: Basic Info -->
+                <div class="teacher-level active-level" id="level1">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="teacherName" placeholder="e.g. Priya Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="teacherEmail" placeholder="priya@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile *</label>
+                        <input type="tel" id="teacherPhone" placeholder="10-digit mobile" pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Location *</label>
+                        <input type="text" id="teacherLocation" placeholder="e.g. Andheri, Mumbai" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subjects you teach *</label>
+                        <input type="text" id="teacherSubjects" placeholder="e.g. Maths, Physics" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Experience (years) *</label>
+                        <input type="number" id="teacherExperience" min="0" step="1" required>
+                    </div>
+                </div>
+
+                <!-- Level 2: Qualifications & Skills -->
+                <div class="teacher-level" id="level2">
+                    <div class="form-group">
+                        <label>Qualifications (e.g. M.Sc, B.Ed) *</label>
+                        <input type="text" id="teacherQualification" placeholder="e.g. M.Sc Physics, B.Ed" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Languages you speak *</label>
+                        <input type="text" id="teacherLanguages" placeholder="e.g. Hindi, English" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Grades you teach *</label>
+                        <input type="text" id="teacherGrades" placeholder="e.g. Class 9-12, JEE" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Certifications (optional)</label>
+                        <input type="text" id="teacherCertifications" placeholder="e.g. CBSE Certified">
+                    </div>
+                </div>
+
+                <!-- Level 3: Professional Details -->
+                <div class="teacher-level" id="level3">
+                    <div class="form-group">
+                        <label>Bio / About you *</label>
+                        <textarea id="teacherBio" rows="3" placeholder="Short introduction..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Fees (per hour) *</label>
+                        <input type="text" id="teacherFees" placeholder="e.g. ₹500/hr" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Availability *</label>
+                        <input type="text" id="teacherAvailability" placeholder="e.g. Mon-Fri 6-9pm" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Demo video URL (optional)</label>
+                        <input type="url" id="teacherDemo" placeholder="YouTube embed link">
+                    </div>
+                    <div class="form-group">
+                        <label>LinkedIn profile (optional)</label>
+                        <input type="url" id="teacherLinkedin" placeholder="https://linkedin.com/in/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" id="teacherPassword" placeholder="Minimum 6 characters" minlength="6" required>
+                    </div>
+                </div>
+
+                <!-- Navigation buttons for teacher -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline" id="prevLevelBtn" style="display: none;">← Back</button>
+                    <button type="button" class="btn" id="nextLevelBtn">Next →</button>
+                    <button type="submit" class="btn" id="teacherSubmitBtn" style="display: none;">Register as Teacher</button>
+                </div>
+            </form>
         </div>
-    </header>
-
-    <section class="teachers-section" id="teachersListContainer">
-        </section>
-
-    <div style="text-align:center; margin: 32px 0;" id="loadMoreContainer">
-      <button id="loadMoreTeachers" class="btn enquiry-btn" style="font-size:1.1rem; padding:14px 36px; border-radius:10px; align-items:center;">
-        Show More Teachers
-      </button>
     </div>
 
-    <section class="teachers-section" id="moreTeachersSection" style="display:none; flex-direction:column; gap:32px; max-width:900px; margin:0 auto 40px auto;">
-      </section>
-    
     <footer class="site-footer">
-      <div class="footer-main">
-        <div class="footer-col">
-          <h4>OUR APP</h4>
-          <p>FindMyTutor: The Learning App</p>
-          <a href="#"
-            ><img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-              alt="Get it on Google Play"
-              class="play-badge"
-          /></a>
+        <div class="footer-main">
+            <div class="footer-col">
+                <h4>OUR APP</h4>
+                <p>FindMyTutor: Tuition Teacher Finder</p>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="play-badge" style="width:140px;"></a>
+            </div>
+            <div class="footer-col">
+                <h4>POPULAR SUBJECTS</h4>
+                <ul>
+                    <li><a href="#">Maths Tuition</a></li>
+                    <li><a href="#">Science Tuition</a></li>
+                    <li><a href="#">English Tuition</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>CLASSES & BOARDS</h4>
+                <ul>
+                    <li><a href="#">CBSE Tuition</a></li>
+                    <li><a href="#">ICSE Tuition</a></li>
+                    <li><a href="#">State Board</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>CONTACT US</h4>
+                <p>support@findmytutor.com</p>
+            </div>
         </div>
-        <div class="footer-col">
-          <h4>POPULAR SUBJECTS</h4>
-          <ul>
-            <li><a href="#">Maths Tuition</a></li>
-            <li><a href="#">Science Tuition</a></li>
-            <li><a href="#">English Tuition</a></li>
-            <li><a href="#">Commerce Tuition</a></li>
-            <li><a href="#">Computer Coding</a></li>
-            <li><a href="#">Spoken English</a></li>
-            <li><a href="#">Olympiad Prep</a></li>
-            <li><a href="#">Competitive Exams</a></li>
-          </ul>
+        <div class="footer-links">
+            <a href="#">About Us</a> | <a href="#">Contact</a> | <a href="#">Terms</a>
+            <span class="footer-copy">FindMyTutor &copy; 2025</span>
         </div>
-        <div class="footer-col">
-          <h4>CLASSES & BOARDS</h4>
-          <ul>
-            <li><a href="#">CBSE Tuition</a></li>
-            <li><a href="#">ICSE Tuition</a></li>
-            <li><a href="#">State Board Tuition</a></li>
-            <li><a href="#">Class 1-5</a></li>
-            <li><a href="#">Class 6-8</a></li>
-            <li><a href="#">Class 9-10</a></li>
-            <li><a href="#">Class 11-12</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>CONTACT US</h4>
-          <p>
-            FindMyTutor Edutech Pvt. Ltd.<br />
-            2nd Floor, Knowledge Tower,<br />
-            Sector 62, Noida, Uttar Pradesh 201309<br />
-            <a href="mailto:support@findmytutor.com" class="footer-mail"
-              >support@findmytutor.com</a
-            >
-          </p>
-          <div class="footer-social">
-            <a href="#"
-              ><img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg"
-                alt="YouTube"
-            /></a>
-            <a href="#"
-              ><img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg"
-                alt="Facebook"
-            /></a>
-            <a href="#"
-              ><img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg"
-                alt="Twitter"
-            /></a>
-            <a href="#"
-              ><img
-                src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/maildotru.svg"
-                alt="Email"
-            /></a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-links">
-        <a href="#">About Us</a>
-        <a href="#">Authors</a>
-        <a href="#">Contact Us</a>
-        <a href="#">FAQs</a>
-        <a href="#">Terms and Conditions</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Sitemap</a>
-        <a href="#">Careers</a>
-        <span class="footer-copy">FindMyTutor &copy; 2025</span>
-      </div>
     </footer>
-    <script src="script.js"></script>
-    <script src="data.js"></script>
+
+    <script>
+        // Tab switching
+        const studentTab = document.getElementById('studentTab');
+        const teacherTab = document.getElementById('teacherTab');
+        const studentForm = document.getElementById('studentForm');
+        const teacherForm = document.getElementById('teacherForm');
+
+        studentTab.addEventListener('click', () => {
+            studentTab.classList.add('active');
+            teacherTab.classList.remove('active');
+            studentForm.style.display = 'block';
+            teacherForm.style.display = 'none';
+            hideMessages();
+        });
+
+        teacherTab.addEventListener('click', () => {
+            teacherTab.classList.add('active');
+            studentTab.classList.remove('active');
+            studentForm.style.display = 'none';
+            teacherForm.style.display = 'block';
+            hideMessages();
+            // Reset teacher level to 1
+            currentLevel = 1;
+            updateLevelUI();
+        });
+
+        function hideMessages() {
+            document.getElementById('registerError').style.display = 'none';
+            document.getElementById('registerSuccess').style.display = 'none';
+        }
+
+        // Teacher multi-level logic
+        let currentLevel = 1;
+        const totalLevels = 3;
+
+        const level1 = document.getElementById('level1');
+        const level2 = document.getElementById('level2');
+        const level3 = document.getElementById('level3');
+        const nextBtn = document.getElementById('nextLevelBtn');
+        const prevBtn = document.getElementById('prevLevelBtn');
+        const submitBtn = document.getElementById('teacherSubmitBtn');
+        const levelDots = document.querySelectorAll('.level-dot');
+
+        function updateLevelUI() {
+            // Hide all levels
+            level1.classList.remove('active-level');
+            level2.classList.remove('active-level');
+            level3.classList.remove('active-level');
+            document.getElementById(`level${currentLevel}`).classList.add('active-level');
+
+            // Update dots
+            levelDots.forEach((dot, idx) => {
+                if (idx + 1 === currentLevel) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+
+            // Show/hide buttons
+            if (currentLevel === 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+            } else if (currentLevel === totalLevels) {
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+                submitBtn.style.display = 'none';
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            // Basic validation for current level before proceeding
+            if (!validateTeacherLevel(currentLevel)) return;
+            if (currentLevel < totalLevels) {
+                currentLevel++;
+                updateLevelUI();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentLevel > 1) {
+                currentLevel--;
+                updateLevelUI();
+            }
+        });
+
+        function validateTeacherLevel(level) {
+            let inputs;
+            if (level === 1) {
+                inputs = [
+                    document.getElementById('teacherName'),
+                    document.getElementById('teacherEmail'),
+                    document.getElementById('teacherPhone'),
+                    document.getElementById('teacherLocation'),
+                    document.getElementById('teacherSubjects'),
+                    document.getElementById('teacherExperience')
+                ];
+            } else if (level === 2) {
+                inputs = [
+                    document.getElementById('teacherQualification'),
+                    document.getElementById('teacherLanguages'),
+                    document.getElementById('teacherGrades')
+                ];
+            } else {
+                inputs = [
+                    document.getElementById('teacherBio'),
+                    document.getElementById('teacherFees'),
+                    document.getElementById('teacherAvailability'),
+                    document.getElementById('teacherPassword')
+                ];
+            }
+            for (let input of inputs) {
+                if (!input.value.trim()) {
+                    showError('Please fill all required fields in this section.');
+                    return false;
+                }
+            }
+            // Email and phone format checks
+            if (level === 1) {
+                const email = document.getElementById('teacherEmail').value;
+                const phone = document.getElementById('teacherPhone').value;
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showError('Enter a valid email address.');
+                    return false;
+                }
+                if (!/^\d{10}$/.test(phone)) {
+                    showError('Enter a valid 10-digit mobile number.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function showError(msg) {
+            const errDiv = document.getElementById('registerError');
+            errDiv.textContent = msg;
+            errDiv.style.display = 'block';
+            document.getElementById('registerSuccess').style.display = 'none';
+        }
+
+        function showSuccess(msg) {
+            const sucDiv = document.getElementById('registerSuccess');
+            sucDiv.textContent = msg;
+            sucDiv.style.display = 'block';
+            document.getElementById('registerError').style.display = 'none';
+        }
+
+        // Student form submission
+        studentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            // Basic validation
+            const name = document.getElementById('studentName').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+            const phone = document.getElementById('studentPhone').value.trim();
+            const location = document.getElementById('studentLocation').value.trim();
+            const grade = document.getElementById('studentGrade').value;
+            const subjects = document.getElementById('studentSubjects').value.trim();
+            const password = document.getElementById('studentPassword').value;
+
+            if (!name || !email || !phone || !location || !grade || !subjects || !password) {
+                showError('All fields are required.');
+                return;
+            }
+            if (!/^\d{10}$/.test(phone)) {
+                showError('Enter a valid 10-digit mobile number.');
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('Enter a valid email address.');
+                return;
+            }
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters.');
+                return;
+            }
+
+            // In a real app, send to Firebase/backend
+            console.log('Student Registration:', { name, email, phone, location, grade, subjects, password });
+            showSuccess('Student registration successful! You can now login.');
+            studentForm.reset();
+        });
+
+        // Teacher form submission
+        teacherForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            // Validate final level (level 3) again
+            if (!validateTeacherLevel(3)) return;
+
+            // Collect all data
+            const teacherData = {
+                name: document.getElementById('teacherName').value.trim(),
+                email: document.getElementById('teacherEmail').value.trim(),
+                phone: document.getElementById('teacherPhone').value.trim(),
+                location: document.getElementById('teacherLocation').value.trim(),
+                subjects: document.getElementById('teacherSubjects').value.trim(),
+                experience: document.getElementById('teacherExperience').value,
+                qualification: document.getElementById('teacherQualification').value.trim(),
+                languages: document.getElementById('teacherLanguages').value.trim(),
+                grades: document.getElementById('teacherGrades').value.trim(),
+                certifications: document.getElementById('teacherCertifications').value.trim(),
+                bio: document.getElementById('teacherBio').value.trim(),
+                fees: document.getElementById('teacherFees').value.trim(),
+                availability: document.getElementById('teacherAvailability').value.trim(),
+                demo_video: document.getElementById('teacherDemo').value.trim(),
+                linkedin: document.getElementById('teacherLinkedin').value.trim(),
+                password: document.getElementById('teacherPassword').value
+            };
+
+            console.log('Teacher Registration:', teacherData);
+            showSuccess('Teacher registration successful! You can now login.');
+            teacherForm.reset();
+            // Reset to level 1
+            currentLevel = 1;
+            updateLevelUI();
+        });
+    </script>
 </body>
 </html>
